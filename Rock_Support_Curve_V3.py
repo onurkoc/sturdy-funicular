@@ -130,12 +130,12 @@ lambda_face = u_if / u_im
 # Analysis of the support
 # -----------------------
 
-# Instead of Vlachopoulus curve, Panet curve is used
-u_io = u_if + (u_im-u_if) * (1-(0.84*r_pm/(dis_sup + 0.84*r_pm))**2)
+# Panet curve (is not used here)
+# u_io = u_if + (u_im-u_if) * (1-(0.84*r_pm/(dis_sup + 0.84*r_pm))**2)
 # Tunnel wall displacement at support installation [m]
 
 # Vlachopoulus curve is as follows:
-# u_io = u_im*(1-(1-u_if/u_im) * np.exp((-3*dis_sup/r_o) / (2*r_pm/r_o)))
+u_io = u_im*(1-(1-u_if/u_im) * np.exp((-3*dis_sup/r_o) / (2*r_pm/r_o)))
 
 K_sc = E_c * (r_o**2 - (r_o-t_c)**2) / (2*(1-nu**2)*(r_o-t_c)*r_o**2)
 # The stiffness of the sprayed concrete [MPa/m]
