@@ -8,6 +8,7 @@ Created on Mon Sep 26 23:22:56 2016
 import numpy as np
 import matplotlib.pyplot as plt
 #import seaborn
+#seaborn.set(font='Liberation sans')
 import Rock_Support_Curve_V3 as rs
 #from mpldatacursor import datacursor #optional to annotate any clicked point
 #get_ipython().magic('matplotlib qt')
@@ -30,7 +31,7 @@ def strength(t):
     else:
         return rs.f_ck*np.sqrt((t-0.212)/(116+0.841*t))
 
-t = np.arange(0, 48, 1)
+t = np.arange(0, 672, 1)
 # Time from zero to 672h (28 days)
 
 f_str = []
