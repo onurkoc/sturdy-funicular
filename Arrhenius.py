@@ -58,7 +58,7 @@ s1d = 24 * 60 * 60
 t1y = 365 * s1d
 # One year in seconds
 
-t1w = 7 * s1d
+t1w = 20 * s1d
 # One year in seconds
 
 time = np.linspace(0.0, t1w, 100)
@@ -76,13 +76,17 @@ fc_t = comp_str(hyd)
 E_ = elasticity(hyd)
 # Calling elasticity function
 
-"""
+axes = plt.gca()
+axes.set_ylim([0,1])
+
 plt.figure(num=1, dpi=125, edgecolor='b')
 plt.plot(time/s1d, hyd)
 plt.title('$Hydration\ Degree$', fontsize=13)
 plt.xlabel('$t\ [days]$', fontsize=12)
 plt.ylabel('$\\xi$', fontsize=12)
 
+plt.show()
+"""
 plt.figure(num=2, dpi=125, edgecolor='b')
 plt.plot(time/s1d, fc_t)
 plt.title('$Strength\ Development$', fontsize=13)
@@ -94,4 +98,6 @@ plt.plot(time/s1d, E_)
 plt.title('$Elasticity\ Development$', fontsize=13)
 plt.xlabel('$t\ [days]$', fontsize=12)
 plt.ylabel('$E\ [GPa]$', fontsize=12)
+
+plt.show()
 """
