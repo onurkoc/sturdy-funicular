@@ -70,8 +70,16 @@ J_v = comp_shortterm(arr.hyd) * 10**6
 J_tot = np.add(J_f, J_v)
 # Total compliance
 
-plt.figure(num=1, dpi=125, edgecolor='b')
-plt.semilogx(time/s1d, J_f)
+plt.figure(num=1, dpi=100, edgecolor='b')
+plt.plot(time/s1d, J_f)
 plt.title('$Total\ Mechanical\ Compliance$', fontsize=13)
 plt.xlabel('$t\ [days]$', fontsize=12)
-plt.ylabel('$J_{tot}$', fontsize=12)
+plt.ylabel('$J_{f}$', fontsize=12)
+
+plt.figure(num=2, dpi=100, edgecolor='b')
+plt.plot(time/s1d, J_v)
+plt.title('$Total\ Mechanical\ Compliance$', fontsize=13)
+plt.xlabel('$t\ [days]$', fontsize=12)
+plt.ylabel('$J_{v}$', fontsize=12)
+
+plt.show()
