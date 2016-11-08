@@ -1,0 +1,26 @@
+import numpy as np
+import pandas as pd
+
+h = np.arange(200, 1000, 100)
+b = 1000
+f_ctm = 2.6
+f_cteff = 0.3 * f_ctm
+phi = 14.0
+c = 50.0
+d_1 = c + (phi / 2)
+d = h - d_1
+E_cm = 31000
+E_s = 200000
+A_ceff = 2.5 * (h - d) * b
+k_bet = 0.85
+k_c = 1
+k = 0.65 + (1 - 0.65) / (800 - 300) * (800 - h)
+A_ct = b * h / 2
+w_k = 0.2
+F_s = A_ct * f_cteff * k * k_c
+F_cr = A_ceff * f_cteff
+
+A_ = pd.DataFrame(list(map(lambda x: (phi * 4 * (x - d) * f_cteff * b / F_s),
+              (h[i] for i in range(len(h))))))
+
+print(A_)
