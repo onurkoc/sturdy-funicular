@@ -4,9 +4,9 @@ __author__: onur koc
 """
 import numpy as np
 import matplotlib.pyplot as plt
-#import seaborn
-#from mpldatacursor import datacursor #optional to annotate any clicked point
-#get_ipython().magic('matplotlib qt')
+import seaborn
+from mpldatacursor import datacursor #optional to annotate any clicked point
+get_ipython().magic('matplotlib qt')
 # Needed for ipython to draw in a seperate window
 
 # ------------
@@ -43,7 +43,7 @@ nu_c = 0.2
 # Poisson's ratio of the sprayed concrete [-]
 t_c = 0.3
 # Thickness of the sprayed concrete [m]
-dis_sup = 0
+dis_sup = 1
 # Distance of the support member to the face
 
 # Other calculated values
@@ -130,8 +130,8 @@ lambda_face = u_if / u_im
 # Analysis of the support
 # -----------------------
 
-# Panet curve (is not used here)
-# u_io = u_if + (u_im-u_if) * (1-(0.84*r_pm/(dis_sup + 0.84*r_pm))**2)
+# Panet curve
+#u_io = u_if + (u_im-u_if) * (1-(0.84*r_pm/(dis_sup + 0.84*r_pm))**2)
 # Tunnel wall displacement at support installation [m]
 
 # Vlachopoulus curve is as follows:
@@ -146,39 +146,39 @@ p_scmax = f_ck/2 * (1 - (r_o - t_c)**2 / r_o**2)
 u_iy = u_io + p_scmax / K_sc
 # Yielding point of the sprayed concrete [m]
 
-point_x = [u_io, u_iy, 1.1*u_iy]
+point_x = [u_io, u_iy, 1.3*u_iy]
 point_y = [0, p_scmax, p_scmax]
 # Points for the support yield line
 
-'''
-fig, ax1 = plt.subplots(num=1, dpi=125, edgecolor='w')
-ax1.plot(x, p_i/1000, lw=1.5, color='blue')
-plt.title('Ground Reaction Curve')
-ax1.set_ylabel('Support Pressure $P_i\,[MPa]$', fontsize=12)
-ax1.set_xlabel('Tunnel Wall Displacement $u_i\,[m]$', fontsize=12)
-for tl in ax1.get_yticklabels():
-    tl.set_color('b')
-
-ax2 = ax1.twinx()
-ax2.plot(x__, x_, lw=1.5, color='red')
-ax2.set_ylabel('Distance from tunnel face $x\,[m]$', fontsize=12)
-# ax2.axhline(y=0, xmin=u_if, xmax=0.045, color='black')
-for tl in ax2.get_yticklabels():
-    tl.set_color('r')
-xposition = [u_if]
-yposition = [0, 5]
-for xc in xposition:
-    ax2.axvline(x=xc, color='k', linestyle='--', lw=1.0)
-for yc in yposition:
-    ax2.axhline(y=yc, color='k', linestyle='--', lw=1.0)
-datacursor(display='multiple', draggable=True)
-
-plt.figure(num=2, dpi=125, edgecolor='b')
-plt.plot(x, p_i/1000, 'b-', lw=1.5)
-plt.plot(point_x, point_y, 'r-', lw=1.5)
-plt.title('Ground Reaction Curve')
-plt.ylabel('Support Pressure $P_i\,[MPa]$', fontsize=12)
-plt.xlabel('Tunnel Wall Displacement $u_i\,[m]$', fontsize=12)
-datacursor(display='multiple', draggable=True)
-plt.show()
-'''
+if __name__ == "__main__":
+    
+    fig, ax1 = plt.subplots(num=1, dpi=125, edgecolor='w')
+    ax1.plot(x, p_i/1000, lw=1.5, color='blue')
+    plt.title('Ground Reaction Curve')
+    ax1.set_ylabel('Support Pressure $P_i\,[MPa]$', fontsize=12)
+    ax1.set_xlabel('Tunnel Wall Displacement $u_i\,[m]$', fontsize=12)
+    for tl in ax1.get_yticklabels():
+        tl.set_color('b')
+    
+    ax2 = ax1.twinx()
+    ax2.plot(x__, x_, lw=1.5, color='red')
+    ax2.set_ylabel('Distance from tunnel face $x\,[m]$', fontsize=12)
+    # ax2.axhline(y=0, xmin=u_if, xmax=0.045, color='black')
+    for tl in ax2.get_yticklabels():
+        tl.set_color('r')
+    xposition = [u_if]
+    yposition = [0, 5]
+    for xc in xposition:
+        ax2.axvline(x=xc, color='k', linestyle='--', lw=1.0)
+    for yc in yposition:
+        ax2.axhline(y=yc, color='k', linestyle='--', lw=1.0)
+    datacursor(display='multiple', draggable=True)
+    
+    plt.figure(num=2, dpi=125, edgecolor='b')
+    plt.plot(x, p_i/1000, 'b-', lw=1.5)
+    plt.plot(point_x, point_y, 'r-', lw=1.5)
+    plt.title('Ground Reaction Curve')
+    plt.ylabel('Support Pressure $P_i\,[MPa]$', fontsize=12)
+    plt.xlabel('Tunnel Wall Displacement $u_i\,[m]$', fontsize=12)
+    datacursor(display='multiple', draggable=True)
+    plt.show()

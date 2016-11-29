@@ -52,16 +52,13 @@ def elasticity (ksi_):
     
     return E_inf * np.sqrt(ksi_)
 
-s1d = 24 * 60 * 60
+s2d = 24 * 60 * 60
 # One day in seconds
 
-t1y = 365 * s1d
-# One year in seconds
+t1y = 28 * s2d
+# Time in days
 
-t1w = 20 * s1d
-# One year in seconds
-
-time = np.linspace(0.0, t1w, 100)
+time = np.linspace(0.0, t1y, 100)
 # Time variable discretized
 
 ksi_init = 0.1
@@ -76,28 +73,22 @@ fc_t = comp_str(hyd)
 E_ = elasticity(hyd)
 # Calling elasticity function
 
-axes = plt.gca()
-axes.set_ylim([0,1])
+if __name__ == "__main__":
+    
+    plt.figure(num=1, dpi=125, edgecolor='b')
+    plt.plot(time/s2d, hyd, 'go-', markersize=3)
+    plt.title('$Hydration\ Degree$', fontsize=13)
+    plt.xlabel('$t\ [days]$', fontsize=12)
+    plt.ylabel('$\\xi$', fontsize=12)
 
-plt.figure(num=1, dpi=125, edgecolor='b')
-plt.plot(time/s1d, hyd)
-plt.title('$Hydration\ Degree$', fontsize=13)
-plt.xlabel('$t\ [days]$', fontsize=12)
-plt.ylabel('$\\xi$', fontsize=12)
+    plt.figure(num=2, dpi=125, edgecolor='b')
+    plt.plot(time/s2d, fc_t)
+    plt.title('$Strength\ Development$', fontsize=13)
+    plt.xlabel('$t\ [days]$', fontsize=12)
+    plt.ylabel('$f_c\ [MPa]$', fontsize=12)
 
-plt.show()
-"""
-plt.figure(num=2, dpi=125, edgecolor='b')
-plt.plot(time/s1d, fc_t)
-plt.title('$Strength\ Development$', fontsize=13)
-plt.xlabel('$t\ [days]$', fontsize=12)
-plt.ylabel('$f_c\ [MPa]$', fontsize=12)
-
-plt.figure(num=3, dpi=125, edgecolor='b')
-plt.plot(time/s1d, E_)
-plt.title('$Elasticity\ Development$', fontsize=13)
-plt.xlabel('$t\ [days]$', fontsize=12)
-plt.ylabel('$E\ [GPa]$', fontsize=12)
-
-plt.show()
-"""
+    plt.figure(num=3, dpi=125, edgecolor='b')
+    plt.plot(time/s2d, E_)
+    plt.title('$Elasticity\ Development$', fontsize=13)
+    plt.xlabel('$t\ [days]$', fontsize=12)
+    plt.ylabel('$E\ [GPa]$', fontsize=12)
