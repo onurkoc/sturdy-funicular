@@ -2,31 +2,30 @@
 """
 __author__: onur koc
 """
+
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn
-from mpldatacursor import datacursor #optional to annotate any clicked point
-get_ipython().magic('matplotlib qt')
-# Needed for ipython to draw in a seperate window
+from mpldatacursor import datacursor 
+#optional to annotate any clicked point
 
 # ------------
 # Input values
 # ------------
-gamma = 25
+gamma = 23
 # Specific weight of the rock mass [kN/m³]
-H = 280
+H = 270
 # Overburden [m]
 nu = 0.3
 # Poisson's ratio of the rock [-]
-E = 1800000
+E = 300000
 # Modulus of elasticity of the rock [kPa]
 p_o = gamma * H
 # In-situ stress [kPa]
-D = 10
+D = 9
 # Diameter of the tunnel [m]
-c = 1500
+c = 300
 # Cohesion of the rock [kPa]
-phi = 23
+phi = 28
 # Friction angle of the rock [deg]
 Phi = np.deg2rad(phi)
 # Convertion from degrees to radians [rad]
@@ -41,9 +40,9 @@ E_c = 30000
 # Young's modulus of the sprayed concrete [MPa]
 nu_c = 0.2
 # Poisson's ratio of the sprayed concrete [-]
-t_c = 0.3
+t_c = 0.25
 # Thickness of the sprayed concrete [m]
-dis_sup = 1
+dis_sup = 0
 # Distance of the support member to the face
 
 # Other calculated values

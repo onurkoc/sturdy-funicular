@@ -7,8 +7,8 @@ Created on Wed Oct 26 2016
 
 import matplotlib.pyplot as plt
 import numpy as np
-import seaborn
-from scipy import integrate
+import scipy.integrate
+import Rock_Support_Curve_V3 as rs
 
 def hydration_degree (ksi, time):
     """Define the right hand-side of the the ode"""
@@ -33,24 +33,18 @@ def hydration_degree (ksi, time):
     
     return Af * np.exp(-E_a / (R * T))
 
-def comp_str (ksi_):
-    """Development of comp. strength in time"""
+def comp_str (ksi, fc_inf):
+    """Development of compressive strength in time"""
     
     ksi_0 = 0.01
     # Initial hydration degree
-    
-    fc_inf = 20
-    # Strength at infinity [MPa]
-    
-    return (ksi_ - ksi_0) / (1 - ksi_0) * fc_inf
 
-def elasticity (ksi_):
+    return (ksi - ksi_0) / (1 - ksi_0) * fc_inf
+
+def elasticity (ksi, E_inf):
     """Development of Young's modulus in time"""
-    
-    E_inf = 30
-    # Elasticity at infinity [GPa]
-    
-    return E_inf * np.sqrt(ksi_)
+
+    return E_inf * np.sqrt(ksi)
 
 s2d = 24 * 60 * 60
 # One day in seconds
@@ -61,16 +55,22 @@ t1y = 28 * s2d
 time = np.linspace(0.0, t1y, 100)
 # Time variable discretized
 
+E_inf = rs.E_c
+# Elasticity at infinity [MPa]
+
+fc_inf = rs.f_ck
+# Strength at infinity [MPa]
+
 ksi_init = 0.1
 # Initial hydration at t = 0
 
-hyd = integrate.odeint(hydration_degree, ksi_init, time)
-# Definition of the hydration-ODE
+hyd = scipy.integrate.odeint(hydration_degree, ksi_init, time)
+# Solve the hydration-ODE
     
-fc_t = comp_str(hyd)
+fc_t = comp_str(hyd, fc_inf)
 # Calling strength function
 
-E_ = elasticity(hyd)
+E_ = elasticity(hyd, E_inf)
 # Calling elasticity function
 
 if __name__ == "__main__":
@@ -91,4 +91,4 @@ if __name__ == "__main__":
     plt.plot(time/s2d, E_)
     plt.title('$Elasticity\ Development$', fontsize=13)
     plt.xlabel('$t\ [days]$', fontsize=12)
-    plt.ylabel('$E\ [GPa]$', fontsize=12)
+    plt.ylabel('$E\ [MPa]$', fontsize=12)
