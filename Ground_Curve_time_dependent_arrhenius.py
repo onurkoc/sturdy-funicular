@@ -44,7 +44,8 @@ if __name__ == "__main__":
 
     plt.subplot(2,2,1)
     ax = plt.gca() #gca = get current axis
-    ax.set_xlim([0, 0.7])
+    ax.set_xlim(left=0, right=u_ix[-1]*1.05)
+    ax.set_ylim([0, max(rs.p_i/1000)]) 
     plt.plot(u_ix, p_scmax, 'r-', lw=1.5, label='SpC, NL')
     plt.plot(rs.x, rs.p_i/1000, 'b-', lw=1.5, label='Ground Curve')
     plt.plot(rs.point_x, rs.point_y, 'y-', lw=1.5, label='SpC, LE')
@@ -67,7 +68,7 @@ if __name__ == "__main__":
     ax2 = plt.gca() #gca = get current axis
     ax2.invert_yaxis() #invert the y-axis
     ax2.xaxis.set_ticks_position('top')
-    ax2.set_xlim([0, 0.7])
+    ax2.set_xlim(left=0, right=u_ix[-1]*1.05)
     plt.plot(u_ix, arr.time/arr.s2d * rate, color='olivedrab', lw=1.5, 
              label='SpC, NL')
     plt.legend(loc='lower left')
